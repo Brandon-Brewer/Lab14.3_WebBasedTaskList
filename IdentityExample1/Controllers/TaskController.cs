@@ -14,15 +14,15 @@ using IdentityExample1.Models;
 
 namespace IdentityExample1.Controllers
 {
-
     //[Authorize]
-    public class InfoController : Controller
+    public class TaskController : Controller
     {
         private readonly UserManager<DapperIdentityUser> _userManager;
         private readonly SignInManager<DapperIdentityUser> _signInManager;
         private readonly ILogger _logger;
+        private DAL dal;
 
-        public InfoController(
+        public TaskController(
             UserManager<DapperIdentityUser> userManager,
             SignInManager<DapperIdentityUser> signInManager,
             ILoggerFactory loggerFactory)
@@ -32,6 +32,7 @@ namespace IdentityExample1.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             ViewData["Name"] = User.Identity.Name;
@@ -40,21 +41,20 @@ namespace IdentityExample1.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddInfo()
+        public IActionResult CreateTask()
         {
             ViewData["Name"] = User.Identity.Name;
             ViewData["UID"] = _userManager.GetUserId(User);
-            return View();
+            return View(new UserTask());
         }
 
         [HttpPost]
-        public IActionResult AddInfo (Info i)
+        public IActionResult CreateTask(UserTask t)
         {
-            i.UserId = int.Parse(_userManager.GetUserId(User));
-
+            //t.OwnerId = int.Parse(_userManager.GetUserId(User));
+            int result = dal.CreateTask(t);
             //add to the database here
-
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

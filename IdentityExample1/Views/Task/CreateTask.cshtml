@@ -1,0 +1,15 @@
+﻿
+@model UserTask
+@{
+    ViewData["Title"] = "Create Task";
+}
+
+<h1>Create Task</h1>
+
+<form asp-controller="Task" asp-action="CreateTask" method="post">
+    <p>Description: <input type="text" name="description" /></p>
+    <p>Due Date: <input type="text" name="dueDate" /></p>
+    <input type="hidden" name="ownerId" value="@ViewData["UID"]" />
+    <input type="hidden" name="completed" value=0 />
+    <p><input type="submit" value="Create Task" /></p>
+</form>

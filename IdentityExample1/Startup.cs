@@ -26,22 +26,20 @@ namespace IdentityExample1
         {
             Configuration = configuration;
         }
-
+        
         public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureDapperConnectionProvider<SqlServerConnectionProvider>(Configuration.GetSection("DapperIdentity"))
                     .ConfigureDapperIdentityCryptography(Configuration.GetSection("DapperIdentityCryptography"))
                     .ConfigureDapperIdentityOptions(new DapperIdentityOptions { UseTransactionalBehavior = false });
-
+            
             services.AddIdentity<DapperIdentityUser, DapperIdentityRole<int>>()
                 .AddDapperIdentityFor<SqlServerConfiguration>()
                 .AddDefaultTokenProviders();
-
-            //need this for Authorize to work!!
-
+            
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
               .AddCookie(options =>
               {
@@ -49,20 +47,20 @@ namespace IdentityExample1
                   options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                   options.Cookie.SameSite = SameSiteMode.Lax;
               });
-
+            
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.MinimumSameSitePolicy = SameSiteMode.Strict;
-                options.HttpOnly = HttpOnlyPolicy.None;
-                options.Secure = CookieSecurePolicy.SameAsRequest;
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -76,16 +74,17 @@ namespace IdentityExample1
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
-
-            app.UseAuthorization();
-
+            
             //add this to access user info in Views
             app.UseAuthentication();
-
+            
+            //use this to use [Authorize] attributes
+            app.UseAuthorization();
+            
             app.UseCookiePolicy();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
