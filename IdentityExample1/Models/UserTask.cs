@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace IdentityExample1.Models
         public int Id { get => id; set => id = value; }
         public int OwnerId { get => ownerId; set => ownerId = value; }
         public string Description { get => description; set => description = value; }
+        [Display(Name = "Due Date")]
         public DateTime DueDate { get => dueDate; set => dueDate = value; }
         public int Completed { get => completed; set => completed = value; }
     }

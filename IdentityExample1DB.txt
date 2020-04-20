@@ -169,8 +169,8 @@ GO
 USE IdentityExample1
 GO
 CREATE TABLE Tasks (
-	[Id] [int] Primary KEY IDENTITY(1,1) NOT NULL,
-	[OwnerId] [int] FOREIGN KEY (Id) REFERENCES IdentityUser(Id) NOT NULL,
+	[Id] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[OwnerId] [int] FOREIGN KEY REFERENCES IdentityUser(Id) NOT NULL,
 	[Description] [nvarchar](256) NOT NULL,
 	[DueDate] [date] NOT NULL,
 	[Completed] [int] NOT NULL)

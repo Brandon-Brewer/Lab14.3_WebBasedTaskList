@@ -119,6 +119,29 @@ namespace IdentityExample1.Controllers
             return View(model);
         }
 
+
+
+        // GET: /Account/Register
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public IActionResult ResetPassword(ResetPasswordViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            return View("ResetPasswordConfirmation");
+        }
+
         //
         // POST: /Account/LogOff
         [HttpPost]

@@ -10,7 +10,10 @@
     <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a class="nav-link text-dark" href="#">Hello @UserManager.GetUserName(User)!</a>
+                <a class="nav-link" href="/Home/Index">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+            <li>
+                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="ResetPassword">Change Password</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>

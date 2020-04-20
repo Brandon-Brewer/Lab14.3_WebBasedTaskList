@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Search Results";
     List<UserTask> Usertasks = (List<UserTask>)ViewData["UserTasks"];
 }
 
@@ -8,14 +8,14 @@
 <br />
 <br />
 <br />
-<h1>My Tasks</h1>
+<h1>@ViewData["Title"]</h1>
 
 <form class="form-inline my-2 my-xl-0" asp-controller="Task" asp-action="SearchTask" method="post">
     <input class="form-control mr-xl-2" type="text" id="Search" name="Search" placeholder="Search Tasks">
     <input type="submit" class="btn btn-outline-primary" value="Search">
 </form>
 
-<a href="/Task/SortTasksByDueDateDESC">|  Sort By Due Date  |</a>
+<a href="/Task/SortTasksByDueDate">|  Sort By Due Date  |</a>
 &nbsp;
 <a href="/Task/GetTasksNotCompleted">|  Show Uncompleted Tasks  |</a>
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using IdentityExample1.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace IdentityExample1.Controllers
 {

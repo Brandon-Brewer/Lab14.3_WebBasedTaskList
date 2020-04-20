@@ -1,0 +1,32 @@
+﻿@model UserTask
+
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<br />
+<br />
+<br />
+<br />
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">@ViewData["Title"]</div>
+    <div class="card-body">
+        <form asp-controller="Task" asp-action="EditTask" method="post">
+            @Html.HiddenFor(m => m.OwnerId)
+            @Html.HiddenFor(m => m.Completed)
+
+            @Html.LabelFor(m => m.Description)
+            <br />
+            @Html.EditorFor(m => m.Description)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.DueDate)
+            <br />
+            @Html.EditorFor(m => m.DueDate)
+            <br />
+            <br />
+            <input type="submit" value="Save Changes" class="btn btn-primary" />
+            <br />
+        </form>
+    </div>
+</div>

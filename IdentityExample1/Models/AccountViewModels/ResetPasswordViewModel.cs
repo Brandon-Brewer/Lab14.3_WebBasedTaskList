@@ -8,7 +8,6 @@ namespace IdentityExample1.Models.AccountViewModels
 {
     public class ResetPasswordViewModel
     {
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
 

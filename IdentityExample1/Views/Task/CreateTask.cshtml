@@ -1,15 +1,24 @@
 ﻿
-@model UserTask
+@model IdentityExample1.Models.UserTask
+@using Microsoft.AspNetCore.Http
+
 @{
     ViewData["Title"] = "Create Task";
 }
 
-<h1>Create Task</h1>
-
-<form asp-controller="Task" asp-action="CreateTask" method="post">
-    <p>Description: <input type="text" name="description" /></p>
-    <p>Due Date: <input type="text" name="dueDate" /></p>
-    <input type="hidden" name="ownerId" value="@ViewData["UID"]" />
-    <input type="hidden" name="completed" value=0 />
-    <p><input type="submit" value="Create Task" /></p>
-</form>
+<br />
+<br />
+<br />
+<br />
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Create Task</div>
+    <div class="card-body">
+        <form asp-controller="Task" asp-action="CreateTask" method="post">
+            <p>Description: <br /><textarea type="text" name="description" rows="10" cols="35" placeholder="Enter Task"></textarea></p>
+            <p>Due Date: <br /><textarea type="text" name="dueDate" rows="1" cols="35" placeholder="MM/DD/YYYY"></textarea></p>
+            <input type="hidden" name="ownerId" value="@ViewData["OwnerId"]" />
+            <input type="hidden" name="completed" value=0 />
+            <p><input class="btn btn-primary" type="submit" value="Create Task" /></p>
+        </form>
+    </div>
+</div>

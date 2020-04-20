@@ -1,14 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<br />
+<br />
+<br />
+<br />
 @if (User.Identity.Name != null)
 {
     <div class="text-center">
         <h1 class="display-4">Hello, @User.Identity.Name</h1>
-        <p>Here are all your tasks, but you can <a href="../Task/CreateTask">create more</a>.</p>
+        <p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+            </div>
+            <br />
+            <a class="btn btn-primary btn-lg" href="../Task/CreateTask">Create Tasks!</a>
+            <a class="btn btn-primary btn-lg" href="../Task/Index">My Tasks!</a>
+        </p>
     </div>
-
 }
 else
 {
